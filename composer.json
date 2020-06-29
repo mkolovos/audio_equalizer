@@ -1,0 +1,10 @@
+{
+  "name": "vendor/test",
+  "bin": [
+    "vendor/bin/test"
+  ],
+  "require": {
+    "php-ffmpeg/php-ffmpeg": "dev-master",
+    "psr/log": "dev-master"
+  }
+}

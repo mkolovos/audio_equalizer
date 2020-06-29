@@ -1,0 +1,10 @@
+.edit-option-list {
+  display: flex;
+  align-items: center;
+  margin: 30px 0 30px 0;
+}
+.edit-option-list > div {
+  border: inset 2px grey;
+  padding: 20px;
+  margin-left: 20px;
+}

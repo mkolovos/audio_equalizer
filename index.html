@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Test project</title>
+  <meta name="description" content="Test project for Audio Control" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <form action="upload.php" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file1" accept=".ogg,.flac,.mp3" id="data-source" required="required" />
+  </form>
+  <div class="edit-option-list">
+    <div id="filter-eq" class="filter">
+      <div class="filter-title prop-on">
+        <input type="checkbox" name="" id="eq-toggle" /><span class="checkbox-label">eq</span>
+      </div>
+      <nobr class="prop-a">
+        <div style="width: 100px;" class="prop-label">20Hz–60Hz</div>
+        <input class="slider" type="range" min="-15" max="15" value="0" step="1"
+          onchange="changeVolumeforFrequency(this, 'volume1')" />
+        <input style="width: 40px;" type="text" id="volume1" value="0" />
+      </nobr>
+      <br />
+      <nobr class="prop-b">
+        <div style="width: 100px;" class="prop-label">60Hz–250Hz</div>
+        <input class="slider" type="range" min="-15" max="15" value="0" step="1"
+          onchange="changeVolumeforFrequency(this, 'volume2')" />
+        <input style="width: 40px;" type="text" id="volume2" value="0" />
+      </nobr>
+      <br />
+      <nobr class="prop-c">
+        <div style="width: 100px;" class="prop-label">250Hz–500Hz</div>
+        <input class="slider" type="range" min="-15" max="15" value="0" step="1"
+          onchange="changeVolumeforFrequency(this, 'volume3')" />
+        <input style="width: 40px;" type="text" id="volume3" value="0" />
+      </nobr>
+      <br />
+      <nobr class="prop-d">
+        <div style="width: 100px;" class="prop-label">500Hz–2KHz</div>
+        <input class="slider" type="range" min="-15" max="15" value="0" step="1"
+          onchange="changeVolumeforFrequency(this, 'volume4')" />
+        <input style="width: 40px;" type="text" id="volume4" value="0" />
+      </nobr>
+      <br />
+      <nobr class="prop-e">
+        <div style="width: 100px;" class="prop-label">2KHz–4KHz</div>
+        <input class="slider" type="range" min="-15" max="15" value="0" step="1"
+          onchange="changeVolumeforFrequency(this, 'volume5')" />
+        <input style="width: 40px;" type="text" id="volume5" value="0" />
+      </nobr>
+      <br />
+      <nobr class="prop-f">
+        <div style="width: 100px;" class="prop-label">4KHz–6KHz</div>
+        <input class="slider" type="range" min="-15" max="15" value="0" step="1"
+          onchange="changeVolumeforFrequency(this, 'volume6')" />
+        <input style="width: 40px;" type="text" id="volume6" value="0" />
+      </nobr>
+      <br />
+      <nobr class="prop-g">
+        <div style="width: 100px;" class="prop-label">6KHz–20KHz</div>
+        <input class="slider" type="range" min="-15" max="15" value="0" step="1"
+          onchange="changeVolumeforFrequency(this, 'volume7')" />
+        <input style="width: 40px;" type="text" id="volume7" value="0" />
+      </nobr>
+    </div>
+  </div>
+  <button data-playing="false" id="controls-play">
+    <span>Play</span>
+  </button>
+  <button onclick="handleClickDownload()">
+    <span>Download</span>
+  </button>
+
+  <!--
+  <script type="text/javascript" src="wasm/libflac.wasm.js"></script>
+  <script type="text/javascript" src="wasm/data-util.js"></script>
+  <script type="text/javascript" src="request.js"></script>
+-->
+  <script type="text/javascript" src="sendRequest.ts"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
