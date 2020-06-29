@@ -1,5 +1,15 @@
 # Real-time audio equalizer
 
+It allows to equalize audio in real-time manner and download with that equalizing option.
+
+## Installation
+Clone this repo to htdocs directory of Xamp(Mamp for mac) and install dependencies.
+```bash
+php composer.phar install
+```
+Start server and browse the [localhost:port/audio_equalizer] to test.
+
+## Usage
 1. Real-time equalizing
 - Load audio file(mp3, flac) locally.
 - Click play button.
