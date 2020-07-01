@@ -4,8 +4,8 @@
   $path = "uploads/"; //file to place within the server
   $valid_formats1 = array("mp3", "ogg", "flac"); //list of file extention to be accepted
   $ffmpeg = FFMpeg\FFMpeg::create([
-    'ffmpeg.binaries'  => 'vendor/ffmpeg',
-    'ffprobe.binaries' => 'vendor/ffprobe'
+    'ffmpeg.binaries'  => 'ffmpeg_bin/ffmpeg',
+    'ffprobe.binaries' => 'ffmpeg_bin/ffprobe'
   ]);
   
   ini_set('display_startup_errors',1);

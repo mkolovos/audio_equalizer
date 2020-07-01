@@ -7,7 +7,7 @@ Clone this repo to htdocs directory of Xamp(Mamp for mac) and install dependenci
 ```bash
 php composer.phar install
 ```
-Start server and browse the [localhost:port/audio_equalizer] to test.
+Start server on port 8080 and browse the [localhost:8080/audio_equalizer] to test.
 
 ## Usage
 1. Real-time equalizing

@@ -12,8 +12,10 @@ fileInput.addEventListener("input", function (e) {
     init()
   }
   audioFile.arrayBuffer().then(function (arrayBuffer) {
-    bufferSource = arrayBuffer
-    playButton.disabled = false
+    audioCtx.decodeAudioData(arrayBuffer).then(function (audioBuffer) {
+      bufferSource = audioBuffer;
+      playButton.disabled = false
+    })
   })
 })
 
@@ -33,8 +35,8 @@ function init() {
 
 function changeVolumeforFrequency(element, elementId) {
   document.getElementById(elementId).value = element.value
-  if (!document.getElementById("controls-play").disabled) {
-    modifyAudio(audioBufferSource, audioCtx, audioCtx.currentTime, true)
+  if (bufferSource && bufferSource.duration > audioCtx.currentTime) {
+    modifyAudio(bufferSource, audioCtx, audioCtx.currentTime, true)
   }
 }
 
@@ -54,12 +56,15 @@ function getFileName(fullPath) {
 
 async function handleClickDownload() {
   const audioFile = fileInput.files[0]
-
+  if (!audioFile) {
+    alert("Please choose audio file!")
+    return;
+  }
   var fd = new FormData()
   fd.append("file1", audioFile)
   fd.append("volumes", JSON.stringify(getCurrentVolumes()))
   //Implement Pause
-  result = await fetch("http://localhost:8080/audio_equalizer/download.php", {
+  result = await fetch("download.php", {
     body: fd,
     method: "POST",
   })

@@ -1,4 +1,4 @@
-let audioBuffer = null, currentTrackNumber = 0, playingBufferSources = []
+let currentTrackNumber = 0, playingBufferSources = []
 
 function ab2str(buf) {
   return String.fromCharCode.apply(null, new Uint8Array(buf))
@@ -144,7 +144,7 @@ function bufferToWave(abuffer, len) {
 }
 
 async function modifyAudio(
-  arrayBuffer,
+  audioBuffer,
   audioCtx,
   startTime,
   isNew,
@@ -153,7 +153,7 @@ async function modifyAudio(
   if (isNew) trackNumber = ++currentTrackNumber
   else if (trackNumber != currentTrackNumber) return
 
-  let offset = startTime * 1024,
+  let offset,
     length,
     buffer,
     result,
@@ -161,8 +161,8 @@ async function modifyAudio(
     time = startTime,
     volumes
 
+  offset = sliceSize * startTime;
   let enc = new TextEncoder()
-  if (!audioBuffer) audioBuffer = await audioCtx.decodeAudioData(arrayBuffer)
   length = audioBuffer.duration
 
   {
@@ -179,7 +179,7 @@ async function modifyAudio(
     fd.append("volumes", JSON.stringify(volumes))
     fd.append("file1", file)
     //Get readable stream of modified audio
-    result = await fetch("http://localhost:8080/audio_equalizer/server.php", {
+    result = await fetch("server.php", {
       body: fd,
       method: "POST",
     })
@@ -198,8 +198,8 @@ async function modifyAudio(
 
     if (time !== length) {
       setTimeout(() => {
-        modifyAudio(null, audioCtx, offset / 1024, false, trackNumber)
-      }, 500)
+        modifyAudio(audioBuffer, audioCtx, offset / sliceSize, false, trackNumber)
+      }, 300)
     } else {
       audioBuffer = null
     }
